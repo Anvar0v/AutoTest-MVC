@@ -1,0 +1,47 @@
+﻿<body class="menu-body">
+    <div class="menu-div">
+        <h1 class="Text"> Menu </h1>
+
+        <button>
+            <a asp-controller="Questions" asp-action="Index" class="Exam-buton" asp-route-index="1"> Examination </a>
+        </button>
+
+        @*in 2nd button we are navigating to the tickets action, 'cause there we have required methods for ticket page
+            like generating ticket buttons and when user clicks that we getting for the user questions
+        *@
+         <button>
+            <a asp-controller="Questions" asp-action="Tickets" class="Exam-buton" asp-route-index="1"> Tickets </a>
+        </button>
+
+    </div>
+</body>
+
+<style>
+
+.menu-body{
+    background:linear-gradient(to right,#8D2EFA,#479CE7,#8D2EFA);
+    justify-content:center;
+}
+
+.menu-div{
+    background:white;
+    height:400px;
+    width:480px;
+    margin-top:180px;
+    margin-left:500px;
+    border-radius:10px;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.Exam-buton{
+    text-decoration:none;
+    font-size:20px;
+    font-weight:bolder;
+}
+
+.Text{
+    margin-top:30px; 
+}
+</style>

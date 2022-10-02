@@ -1,0 +1,75 @@
+﻿<body class="body">
+<div class="div">
+    <h2> Sign in </h2>
+<form asp-controller="Login" asp-action="UserSignin" method="post">
+    <input class="PhoneInput" type="text" name="PhoneNumber" placeholder="Phone Number" /><br />
+    <input class="PasswordInput" type="password" name="Password" placeholder="Password" /><br />
+    <input class="submitInput" type="submit" value="Login" />
+</form>
+
+<label class="label"> Need an account ? </label>
+<a asp-controller="Login" asp-action="LoginNewUser" class="signupButton">Sign up</a>
+</div>
+</body>
+
+
+@*//style of the sign up page*@
+    <style>
+    .PhoneInput{
+        margin:auto;
+        padding:5px;
+        width:300px;
+        height:35px;
+        border-radius:12px;
+    }
+
+    .PasswordInput{
+        margin:auto;
+        padding:5px;
+        height:35px;
+        width:300px;
+        border-radius:12px;
+        margin-top:10px;
+    }
+
+    .submitInput{
+        width:180px;
+        height:35px;
+        margin-top:15px;
+        background-color: mediumpurple;
+        border-radius:15px;
+        color:white;
+        font-size: 16px;
+    }
+
+    .div{
+        border-radius:15px;
+        background: white;
+        height:300px;
+        width:380px;
+        text-align:center;
+        margin: auto;
+        padding: 0px;
+        align-items: center;
+    }
+
+     .signupButton{
+        text-decoration: none;
+        color: dodgerblue;
+        margin-top: 10px;
+    }
+
+    .body{
+        display:flex;
+        height:100vh;
+        align-items:center;
+        justify-content: center;
+        background:#8D2EFA; 
+    }
+
+    .label{
+        color: slategray;
+        margin-top:10px;
+    }
+</style>
+

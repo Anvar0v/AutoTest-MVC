@@ -1,0 +1,44 @@
+﻿@using StaticFiles.MVC.Services
+@using WPF_App.Repositories
+<div class="ticketPanel">
+    <h1>Tickets</h1>
+    @{
+        var questionRepository = new QuestionRepository();
+        var ticketsCount = questionRepository.GetTicketsCount();
+        var ticketRepository = new TicketRepository();
+        for (int i = 0; i < ticketsCount; i++)
+        {
+            var ticketNumber = i + 1;
+            //we are navigating to the index action 'cause there we have all data to start exam
+            <button class="TicketButton">
+            <a class="ticketButtonText" asp-controller="Questions" asp-action="Index" asp-route-index="@ticketNumber"> Ticket @ticketNumber </a>
+            </button>
+        }
+    }
+</div>
+
+
+<style>
+    .TicketButton{
+        width:400px;
+        height:50px;
+        margin:10px;
+        display:flex;
+        flex-direction:column;
+        border-radius:8px;
+        border-color:teal;
+    }
+
+    .ticketPanel{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+    }
+
+    .ticketButtonText{
+        font-size:18px;
+        padding:10px;
+    }
+
+</style>

@@ -1,0 +1,140 @@
+﻿@using StaticFiles.MVC.Models
+@using StaticFiles.MVC.Services
+@model StaticFiles.MVC.Models.QuestionEntity
+
+@{
+var imageSource = Model.Media.Exist ?  $"{Model.Media.Name}.png" 
+: "nophoto.jpg";
+}
+
+@{
+    
+<div class="questionsIndexDiv">
+@{
+    var questionRepository = new QuestionRepository();
+    var ticket = new Ticket();
+    for (int i = 0; i < questionRepository.TicketQuestionsCount; i++)
+{
+    <button class="questionIndexBtn">
+    <a asp-controller="Questions" asp-action="Index" asp-route-index="@(i+1)"
+    style="text-decoration:none; font-size:16px; color:black"> @(i+1)</a>
+    </button>
+}
+
+}                                                    
+</div>
+   
+<br />
+<div class="choicePanel">
+    <img src="~/Images/@imageSource" width="200px" height="auto" class="image"/>
+    <h3>@Model.Question</h3>                                                                                    
+                                                                                                                        
+@for (int i = 0; i < Model.Choices.Count; i++)
+{
+var choice = Model.Choices[i];
+                     
+if(ViewBag.ChoiceResult != null) //is there is a index that is passed to the viewbag it then checks weather that is true or not 
+{
+if(ViewBag.ChoiceIndex == i ) // 1 == 1 
+{
+    //here it displays the button which has correct answer, if "else" condition is not written it only dispalays only one button
+    if(ViewBag.ChoiceResult)
+    {
+        ticket.CorrectAnswerCount++;
+        <button class="choiceButton" style="background:lightgreen">
+        <a class="choice" >@choice.Text</a>
+        </button>
+                            
+    }
+    //here it also displays buttons that are not answer to the question 
+    else
+    {
+        <button class="choiceButton" style="background-color:red">
+        <a class="choice">@choice.Text</a>
+        </button>
+    }
+}
+else
+{
+    <button class="choiceButton">
+    <a class="choice">@choice.Text
+    </a>
+    </button>
+    <br />   
+}
+
+}
+else //else condition is for showing buttons to the user,because when parameter is not passed to the viewbag.choiceindex is gonna be null and nothing is gonna happen
+{
+    <button class="choiceButton">
+    <a asp-controller="Questions" class="choice" 
+    asp-action="Index" 
+    asp-route-questionIndex=@Model.Id 
+    asp-route-choiceIndex=@i>@choice.Text
+    </a>
+    </button>
+    <br />   
+}
+
+}
+</div>
+}
+
+<style>
+.questionsIndexDiv{
+display:flex;
+flex-direction: row;
+justify-content:center;
+margin-top:15px;
+}
+
+.questionIndexBtn{
+display:flex;
+align-items:center;
+justify-content:center;
+height:35px;
+width: 40px;
+margin:10px;
+border-color:teal;
+border-radius:10px;
+}
+
+.choice{
+text-decoration:none;
+color:black;
+padding:5px;
+}
+
+.choiceButton:hover{
+background:aliceblue;
+}
+
+.choiceButton{
+width:400px;
+height:50px;
+align-items:center;
+margin:5px;
+border-radius:8px;
+flex-wrap:wrap;
+border-color:teal;
+font-size:14px;
+font-weight:normal;
+}
+
+.image{
+align-items:center;
+width: 400px;
+height:220px;
+text-align:center;
+border-radius:8px;
+margin:10px;
+border-color:teal;
+}
+
+.choicePanel{
+display:flex;
+align-items:center;
+flex-direction:column;
+}
+    
+</style>
